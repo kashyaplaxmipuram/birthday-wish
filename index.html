@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Happy Birthday Dad</title>
+<style>
+*{margin:0;padding:0;box-sizing:border-box;font-family:Arial,sans-serif}
+body{background:linear-gradient(135deg,#1e3c72,#2a5298);color:#fff;overflow-x:hidden;text-align:center}
+section{min-height:100vh;display:none;justify-content:center;align-items:center;flex-direction:column;padding:30px}
+section.active{display:flex;animation:fade .8s}
+h1{font-size:3rem;margin-bottom:20px}
+p{max-width:700px;line-height:1.8}
+button{padding:12px 24px;border:none;border-radius:30px;background:#ffd700;font-size:18px;cursor:pointer;margin:10px}
+button:hover{transform:scale(1.05)}
+#gift{font-size:120px;cursor:pointer;transition:.4s}
+#gift:hover{transform:scale(1.1) rotate(8deg)}
+.card,.leaf{background:rgba(255,255,255,.15);padding:18px;border-radius:15px;margin:10px;width:260px}
+.timeline,.tree,.cards{display:flex;flex-wrap:wrap;justify-content:center}
+.gallery img{width:70vw;max-width:600px;border-radius:15px;border:4px solid #fff}
+.quiz button{display:block;width:250px;margin:10px auto}
+#cake{font-size:140px}
+.heart,.balloon{position:fixed;bottom:-50px;pointer-events:none}
+@keyframes float{to{transform:translateY(-120vh);opacity:0}}
+@keyframes fade{from{opacity:0;transform:translateY(20px)}to{opacity:1;transform:translateY(0)}}
+</style>
+</head>
+<body>
+
+<section id="s0" class="active">
+<h1>🎂 Happy Birthday Dad ❤️</h1>
+<p>My First Hero, My Greatest Teacher, My Biggest Inspiration.</p>
+<button onclick="next()">Start Surprise 🎁</button>
+</section>
+
+<section id="s1">
+<h1>Your Gift</h1>
+<div id="gift" onclick="openGift()">🎁</div>
+<p id="giftMsg" style="display:none;margin-top:20px">Dear Dad, thank you for every sacrifice, every lesson, and every smile. Happy Birthday! ❤️</p>
+</section>
+
+<section id="s2">
+<h1>Beautiful Memories 📸</h1>
+<div class="timeline">
+<div class="card">👶 Thank you for holding my hand.</div>
+<div class="card">🚲 Teaching me every day.</div>
+<div class="card">🎓 Believing in my dreams.</div>
+<div class="card">❤️ Always supporting our family.</div>
+</div>
+<button onclick="next()">Next</button>
+</section>
+
+<section id="s3">
+<h1>Family Gallery</h1>
+<div class="gallery">
+<img id="img" src="https://picsum.photos/800/500?random=1">
+</div>
+<button onclick="prevImg()">◀</button>
+<button onclick="nextImg()">▶</button>
+<br><button onclick="next()">Next</button>
+</section>
+
+<section id="s4">
+<h1>💌 Letter to Dad</h1>
+<p id="letter"></p>
+<button onclick="typeLetter()">Open Letter</button>
+<button onclick="next()">Next</button>
+</section>
+
+<section id="s5">
+<h1>🏆 World's Best Father</h1>
+<p><b>Certificate of Appreciation</b><br><br>Presented to <b>MY DAD</b><br>For being the World's Best Father ⭐⭐⭐⭐⭐</p>
+<button onclick="window.print()">Print Certificate</button>
+<button onclick="next()">Next</button>
+</section>
+
+<section id="s6">
+<h1>Quiz</h1>
+<div class="quiz">
+<p>Dad's favourite food?</p>
+<button onclick="quiz('Biryani')">Biryani</button>
+<button onclick="quiz('Pizza')">Pizza</button>
+<button onclick="quiz('Dosa')">Dosa</button>
+<p id="quizResult"></p>
+</div>
+<button onclick="next()">Next</button>
+</section>
+
+<section id="s7">
+<h1>Thank You Dad ❤️</h1>
+<div class="cards">
+<div class="card">😊 For Every Smile</div>
+<div class="card">💪 For Every Sacrifice</div>
+<div class="card">🙏 For Every Lesson</div>
+<div class="card">🏡 For Always Being There</div>
+</div>
+<button onclick="next()">Next</button>
+</section>
+
+<section id="s8">
+<h1>Birthday Cake</h1>
+<div id="cake">🎂</div>
+<button onclick="blow()">Blow Candles</button>
+<p id="wish"></p>
+<button onclick="next()">Next</button>
+</section>
+
+<section id="s9">
+<h1>Wish Tree 🌳</h1>
+<div class="tree">
+<div class="leaf">🍃 Stay Healthy</div>
+<div class="leaf">🍃 Stay Happy</div>
+<div class="leaf">🍃 Keep Smiling</div>
+<div class="leaf">🍃 Long Life</div>
+</div>
+<button onclick="next()">Final</button>
+</section>
+
+<section id="s10">
+<h1>🎉 Happy Birthday Dad ❤️</h1>
+<p>Thank you for everything. You are my hero forever. Wishing you happiness, health, success and endless smiles.</p>
+<h2>❤️ We Love You ❤️</h2>
+</section>
+
+<script>
+let sec=0;
+const sections=[...document.querySelectorAll("section")];
+function show(i){sections.forEach(s=>s.classList.remove("active"));sections[i].classList.add("active");}
+function next(){if(sec<sections.length-1){sec++;show(sec);}}
+function openGift(){gift.textContent="🎉";giftMsg.style.display="block";setTimeout(next,1800);}
+const imgs=[
+"https://picsum.photos/800/500?random=1",
+"https://picsum.photos/800/500?random=2",
+"https://picsum.photos/800/500?random=3",
+"https://picsum.photos/800/500?random=4"];
+let gi=0;
+function nextImg(){gi=(gi+1)%imgs.length;img.src=imgs[gi]}
+function prevImg(){gi=(gi-1+imgs.length)%imgs.length;img.src=imgs[gi]}
+setInterval(()=>{if(sec===3)nextImg();},3000);
+
+const text="Dear Dad,\n\nThank you for believing in me, supporting me, and standing by me through every challenge. I am grateful for your love every single day.\n\nHappy Birthday! ❤️";
+function typeLetter(){let i=0;letter.textContent="";let t=setInterval(()=>{letter.textContent+=text[i++]||"";if(i>text.length)clearInterval(t)},30);}
+function quiz(a){quizResult.textContent=a==="Biryani"?"🎉 Correct!":"😊 Nice try!";}
+function blow(){cake.textContent="🎂";wish.textContent="✨ Make a wish, Dad!";confetti();}
+function confetti(){
+ for(let i=0;i<120;i++){
+  let d=document.createElement("div");
+  d.className="heart";
+  d.textContent=Math.random()>.5?"🎉":"❤️";
+  d.style.left=Math.random()*100+"vw";
+  d.style.fontSize=(16+Math.random()*18)+"px";
+  d.style.animation="float "+(3+Math.random()*3)+"s linear forwards";
+  document.body.appendChild(d);
+  setTimeout(()=>d.remove(),6000);
+ }
+}
+setInterval(()=>{
+ let b=document.createElement("div");
+ b.className="balloon";
+ b.textContent="🎈";
+ b.style.left=Math.random()*100+"vw";
+ b.style.fontSize=(24+Math.random()*24)+"px";
+ b.style.animation="float 8s linear forwards";
+ document.body.appendChild(b);
+ setTimeout(()=>b.remove(),8000);
+},900);
+</script>
+</body>
+</html>
